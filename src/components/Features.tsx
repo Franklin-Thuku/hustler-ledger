@@ -16,7 +16,7 @@ export default function Features() {
             We convert your daily cash flow into a verified credit score.
           </p>
           <div className="space-y-4">
-            {["Transaction Tracking", "Credit Score Generation"].map((item) => (
+            {["Transaction Tracking", "Credit Score Generation", "Instant Statements"].map((item) => (
               <div key={item} className="flex items-center gap-4 bg-gray-50 p-5 rounded-[2rem] border border-gray-100 font-black italic text-jungle/60">
                 <div className="w-6 h-6 rounded-full bg-hustler-lime flex items-center justify-center text-jungle">✓</div>
                 {item}
@@ -27,11 +27,10 @@ export default function Features() {
 
         {/* The Layered Phone Stack */}
         <div className="relative h-[650px] flex items-center justify-center md:justify-end md:pr-40">
-          
-          {/* Peeping White Phone (Behind) - Pulled Out significantly */}
+         
           <motion.div 
             initial={{ x: 100, opacity: 0 }}
-            whileInView={{ x: 220, opacity: 1 }} /* Pulled out further for full visibility */
+            whileInView={{ x: 220, opacity: 1 }} 
             className="absolute w-64 h-[520px] bg-white border-[1px] border-gray-200 rounded-[3rem] shadow-2xl z-0 flex flex-col items-center justify-center p-8"
           >
             <div className="text-center breathe">
