@@ -1,67 +1,78 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation"; //
 
 export default function RegisterBusiness() {
+  const router = useRouter(); //
   const [formData, setFormData] = useState({ title: "", description: "" });
   const step = 1; 
 
+  // This function handles the click and moves the user to the next page
+  const handleConfirmBusiness = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Business Registered:", formData);
+    router.push("/ledger-setup"); // 
+  };
+
   return (
-    <main className="min-h-screen bg-[#0a0f0d] flex flex-col items-center justify-center px-6 relative">
+    <main className="min-h-screen bg-[#060807] flex flex-col items-center justify-center px-4 relative overflow-hidden">
       
-      {/* 1. Progress Bars */}
-      <div className="absolute top-12 w-full max-w-md flex gap-3 px-4">
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#062d1a_0%,transparent_70%)] opacity-20 pointer-events-none" />
+
+      {/* Progress Bars */}
+      <div className="absolute top-10 w-full max-w-[280px] md:max-w-xs flex gap-2">
         {[1, 2, 3].map((num) => (
           <div key={num} className="flex-1">
-            <div className={`h-1.5 rounded-full transition-all duration-500 ${num <= step ? 'bg-lime shadow-[0_0_10px_#c1ff72]' : 'bg-white/10'}`} />
+            <div className={`h-[3px] rounded-full transition-all duration-700 ${num <= step ? 'bg-hustler-lime shadow-[0_0_12px_#a3e635]' : 'bg-white/5'}`} />
           </div>
         ))}
       </div>
 
-      {/* 2. The Visible Card */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-lg bg-[#121815] border border-white/10 p-10 rounded-[3rem] shadow-[0_40px_100px_rgba(0,0,0,0.8)]"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-md bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-8 md:p-12 rounded-[3rem] shadow-[0_40px_100px_rgba(0,0,0,0.6)] relative z-10"
       >
-        <header className="mb-10 text-left">
-          <h1 className="text-white text-4xl font-black uppercase italic tracking-tighter">
-            Register Business
-          </h1>
-          <p className="text-white/40 text-sm mt-2 font-bold tracking-widest uppercase">Step 01: Core Details</p>
+        <header className="mb-12">
+          <h1 className="hustler-incredible !text-3xl text-left">The <br />Identity.</h1>
+          <p className="text-white/30 text-[9px] font-black uppercase tracking-[0.4em] mt-4">Section 01: Business Profile</p>
         </header>
         
-        <form className="space-y-8">
-          <div className="space-y-3">
-            <label className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 ml-2">Business Title</label>
+        {/* Fix: Added the onSubmit handler here */}
+        <form onSubmit={handleConfirmBusiness} className="space-y-10">
+          <div className="space-y-4">
+            <label className="text-[10px] font-black uppercase tracking-[0.3em] text-white/20 ml-1">Title</label>
             <input 
               type="text"
+              required
               value={formData.title}
-              className="w-full bg-white text-black rounded-2xl p-5 text-lg font-bold outline-none border-4 border-transparent focus:border-lime/40 transition-all shadow-inner"
-              placeholder="e.g. Mama Mboga Fresh"
+              className="w-full bg-white/[0.05] border border-white/5 rounded-2xl p-5 text-white font-medium outline-none focus:border-hustler-lime/50 focus:bg-white/[0.08] transition-all"
+              placeholder="Business Name"
               onChange={(e) => setFormData({...formData, title: e.target.value})}
             />
           </div>
 
-          <div className="space-y-3">
-            <label className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 ml-2">Brief Description</label>
+          <div className="space-y-4">
+            <label className="text-[10px] font-black uppercase tracking-[0.3em] text-white/20 ml-1">Description</label>
             <textarea 
+              required
               value={formData.description}
               rows={4}
-              className="w-full bg-white text-black rounded-2xl p-5 text-lg font-bold outline-none border-4 border-transparent focus:border-lime/40 transition-all resize-none shadow-inner"
-              placeholder="What do you sell or do?"
+              className="w-full bg-white/[0.05] border border-white/5 rounded-2xl p-5 text-white font-medium outline-none focus:border-hustler-lime/50 focus:bg-white/[0.08] transition-all resize-none"
+              placeholder="Give a brief description of your business..."
               onChange={(e) => setFormData({...formData, description: e.target.value})}
             />
           </div>
 
-          {/* Solid Lime Button for maximum visibility */}
+          
           <motion.button 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            type="button"
-            className="w-full bg-lime text-[#062d1a] py-6 rounded-full font-[950] text-xl uppercase italic shadow-[0_20px_50px_rgba(193,255,114,0.2)] mt-6"
+            type="submit"
+            className="w-full bg-hustler-lime text-jungle py-6 rounded-full font-[950] text-sm uppercase tracking-widest italic shadow-[0_20px_40px_rgba(163,230,53,0.15)] mt-4"
           >
-            Continue
+            Confirm Business
           </motion.button>
         </form>
       </motion.div>
