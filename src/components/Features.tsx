@@ -1,93 +1,63 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Features() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const phone1Y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const phone2Y = useTransform(scrollYProgress, [0, 1], [250, -250]);
-
   return (
-    <section ref={ref} className="py-24 bg-white overflow-hidden perspective-1000">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+    <section className="py-32 px-6 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         
-        {/* Left Side: Content */}
-        <div>
-          <h2 className="text-forest text-5xl md:text-7xl font-extrabold tracking-tighter leading-none">
-            Build a Financial <br />
-            <span className="opacity-30">Identity.</span>
+        {/* Incredible Word Styling */}
+        <div className="z-20">
+          <h2 className="text-jungle text-[clamp(2.5rem,7vw,4.5rem)] font-black italic uppercase leading-[0.8] tracking-tighter mb-8">
+            Build a <br />
+            <span className="hustler-incredible">Financial Identity.</span>
           </h2>
-          <p className="mt-8 text-gray-600 text-xl leading-relaxed max-w-md">
-            We convert your daily cash flow into a verified credit score. No more being "invisible" to banks.
+          <p className="text-gray-400 text-xl mb-12 max-w-md font-medium">
+            We convert your daily cash flow into a verified credit score.
           </p>
-          
-          <div className="mt-12 space-y-4">
-            {['Transaction Tracking', 'Credit Score Generation', 'Instant Statements'].map((item, i) => (
-              <motion.div 
-                key={item} 
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="flex items-center gap-4 p-4 rounded-2xl bg-forest/5 border border-forest/10 hover:bg-lime/10 transition-colors group"
-              >
-                <div className="w-8 h-8 rounded-full bg-lime flex items-center justify-center text-forest font-bold group-hover:scale-110 transition-transform">✓</div>
-                <span className="font-bold text-forest text-lg">{item}</span>
-              </motion.div>
+          <div className="space-y-4">
+            {["Transaction Tracking", "Credit Score Generation"].map((item) => (
+              <div key={item} className="flex items-center gap-4 bg-gray-50 p-5 rounded-[2rem] border border-gray-100 font-black italic text-jungle/60">
+                <div className="w-6 h-6 rounded-full bg-hustler-lime flex items-center justify-center text-jungle">✓</div>
+                {item}
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Right Side: Interactive Phones */}
-        <div className="relative h-[600px] md:h-[800px] flex items-center justify-center">
+        {/* The Layered Phone Stack */}
+        <div className="relative h-[650px] flex items-center justify-center md:justify-end md:pr-40">
           
-          {/* Phone Mockup 1: Transaction Ledger */}
+          {/* Peeping White Phone (Behind) - Pulled Out significantly */}
           <motion.div 
-            style={{ y: phone1Y }}
-            whileHover={{ scale: 1.05, rotateY: -10, rotateX: 5 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="absolute left-0 top-0 w-3/5 aspect-[9/19] bg-forest rounded-[3rem] border-[8px] border-forest-light shadow-2xl overflow-hidden cursor-pointer z-20"
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 220, opacity: 1 }} /* Pulled out further for full visibility */
+            className="absolute w-64 h-[520px] bg-white border-[1px] border-gray-200 rounded-[3rem] shadow-2xl z-0 flex flex-col items-center justify-center p-8"
           >
-            <div className="p-6 h-full flex flex-col">
-              <div className="w-12 h-2 bg-white/20 rounded-full mx-auto mb-8" />
-              <div className="space-y-4">
-                <div className="h-24 w-full bg-lime/10 rounded-2xl border border-lime/20 p-4">
-                    <div className="h-2 w-1/2 bg-lime/40 rounded mb-2" />
-                    <div className="h-4 w-3/4 bg-lime rounded" />
-                </div>
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="flex items-center gap-3 bg-white/5 p-3 rounded-xl">
-                    <div className="w-8 h-8 rounded bg-white/10" />
-                    <div className="flex-1 space-y-2">
-                        <div className="h-2 w-1/2 bg-white/20 rounded" />
-                        <div className="h-1 w-1/3 bg-white/10 rounded" />
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="text-center breathe">
+              <span className="text-7xl font-black italic text-jungle leading-none">785</span>
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-hustler-lime mt-4">EXCELLENT</p>
+            </div>
+            <div className="w-full mt-12 space-y-3 opacity-10">
+               <div className="h-2 bg-gray-300 rounded-full w-20 mx-auto" />
+               <div className="h-10 bg-gray-100 rounded-2xl w-full" />
             </div>
           </motion.div>
 
-          {/* Phone Mockup 2: Credit Score */}
+          {/* Primary Jungle Phone (Front) */}
           <motion.div 
-            style={{ y: phone2Y }}
-            whileHover={{ scale: 1.05, rotateY: 10, rotateX: 5 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="absolute right-0 top-20 w-3/5 aspect-[9/19] bg-white rounded-[3rem] border-[8px] border-gray-100 shadow-2xl overflow-hidden cursor-pointer z-10"
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            className="w-72 h-[560px] bg-jungle rounded-[3.5rem] border-[10px] border-jungle shadow-[0_50px_100px_rgba(0,0,0,0.4)] z-10 p-8 relative"
           >
-            <div className="p-6 h-full flex flex-col items-center justify-center text-center">
-                <div className="w-32 h-32 rounded-full border-[10px] border-lime flex items-center justify-center mb-4">
-                    <span className="text-forest text-4xl font-black">785</span>
-                </div>
-                <p className="text-forest font-black uppercase tracking-tighter text-xl">Excellent</p>
-                <div className="mt-6 w-full space-y-2">
-                    <div className="h-2 w-full bg-gray-100 rounded" />
-                    <div className="h-2 w-4/5 bg-gray-100 rounded" />
-                </div>
+            <div className="h-1.5 w-14 bg-white/10 rounded-full mx-auto mb-12" />
+            <div className="bg-hustler-lime/20 h-14 w-full rounded-2xl mb-8 flex items-center px-5">
+               <div className="h-2.5 w-24 bg-hustler-lime rounded-full" />
+            </div>
+            <div className="space-y-5">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="h-20 bg-white/[0.03] rounded-3xl border border-white/5" />
+              ))}
             </div>
           </motion.div>
 
