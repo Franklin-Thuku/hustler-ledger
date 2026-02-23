@@ -1,4 +1,3 @@
-
 @import "tailwindcss";
 
 @theme {
@@ -11,7 +10,10 @@
   --foreground: #ffffff;
 }
 
-body {
+/* Global overflow safeguard for the "Ghost Shadow" approach */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
   background-color: var(--background);
   color: var(--foreground);
   font-family: 'Geist', sans-serif;
@@ -48,7 +50,34 @@ body {
   }
 
   @keyframes breathe-pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.98); }
+    0%, 100% { 
+      opacity: 1; 
+      transform: scale(1); 
+      filter: drop-shadow(0 0 15px rgba(163, 230, 53, 0.2)); 
+    }
+    50% { 
+      opacity: 0.4; 
+      transform: scale(0.98); 
+      filter: drop-shadow(0 0 30px rgba(163, 230, 53, 0.5)); 
+    }
+  }
+}
+
+@layer utilities {
+  .step-glow {
+    box-shadow: 0 0 15px rgba(193, 255, 114, 0.4);
+  }
+
+  /* Added: Ghost Shadow utility for the new phone approach */
+  .ghost-shadow {
+    filter: blur(60px);
+    opacity: 0.15;
+    background: var(--color-jungle);
+  }
+
+  /* Added: Neon Status utility for the "Loan Qualified" badge */
+  .neon-status {
+    box-shadow: 0 0 20px rgba(163, 230, 53, 0.4);
+    border: 1px solid rgba(163, 230, 53, 0.5);
   }
 }
