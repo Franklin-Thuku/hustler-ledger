@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
+@theme {
+  --color-dark-slate: #0a0f0d;
+  --color-forest: #062d1a;
+  --color-lime: #c1ff72;
+  --color-glass: rgba(255, 255, 255, 0.03);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #062d1a; /* Jungle Green as the core */
+  --foreground: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Geist', sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer utilities {
+  .neon-glow {
+    text-shadow: 0 0 15px rgba(193, 255, 114, 0.4);
+    filter: drop-shadow(0 0 10px rgba(193, 255, 114, 0.2));
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+footer {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
 }
