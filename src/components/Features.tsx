@@ -1,96 +1,77 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Features() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const phone1Y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const phone2Y = useTransform(scrollYProgress, [0, 1], [250, -250]);
-
   return (
-    <section ref={ref} className="py-24 bg-white overflow-hidden perspective-1000">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+    <section className="py-24 md:py-32 px-4 md:px-6 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         
-        {/* Left Side: Content */}
-        <div>
-          <h2 className="text-forest text-5xl md:text-7xl font-extrabold tracking-tighter leading-none">
-            Build a Financial <br />
-            <span className="opacity-30">Identity.</span>
+        <div className="z-20 text-center md:text-left">
+          <h2 className="text-jungle text-[clamp(2.5rem,8vw,4.5rem)] font-black italic uppercase leading-[0.85] tracking-tighter mb-8">
+            Build a <br />
+            <span className="hustler-incredible">Financial Identity.</span>
           </h2>
-          <p className="mt-8 text-gray-600 text-xl leading-relaxed max-w-md">
-            We convert your daily cash flow into a verified credit score. No more being "invisible" to banks.
+          <p className="text-gray-400 text-lg md:text-xl mb-12 max-w-md mx-auto md:mx-0 font-medium italic">
+            Your daily hustle, now verified. Get the credit you deserve.
           </p>
-          
-          <div className="mt-12 space-y-4">
-            {['Transaction Tracking', 'Credit Score Generation', 'Instant Statements'].map((item, i) => (
-              <motion.div 
-                key={item} 
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="flex items-center gap-4 p-4 rounded-2xl bg-forest/5 border border-forest/10 hover:bg-lime/10 transition-colors group"
-              >
-                <div className="w-8 h-8 rounded-full bg-lime flex items-center justify-center text-forest font-bold group-hover:scale-110 transition-transform">✓</div>
-                <span className="font-bold text-forest text-lg">{item}</span>
-              </motion.div>
+          <div className="space-y-4 max-w-sm mx-auto md:mx-0">
+            {["Transaction Tracking", "Credit Score Generation", "Instant Statements"].map((item) => (
+              <div key={item} className="flex items-center gap-4 bg-gray-50 p-5 rounded-[2rem] border border-gray-100 font-black italic text-jungle/60">
+                <div className="w-6 h-6 rounded-full bg-hustler-lime flex items-center justify-center text-jungle text-xs">✓</div>
+                {item}
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Right Side: Interactive Phones */}
-        <div className="relative h-[600px] md:h-[800px] flex items-center justify-center">
+        {/* Creative "Single Hero Phone" with Ghost Shadow */}
+        <div className="relative h-[600px] flex items-center justify-center md:justify-end md:pr-20 mt-16 md:mt-0">
           
-          {/* Phone Mockup 1: Transaction Ledger */}
+          {/* 1. Creative "Ghost Shadow" Peeking Behind */}
           <motion.div 
-            style={{ y: phone1Y }}
-            whileHover={{ scale: 1.05, rotateY: -10, rotateX: 5 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="absolute left-0 top-0 w-3/5 aspect-[9/19] bg-forest rounded-[3rem] border-[8px] border-forest-light shadow-2xl overflow-hidden cursor-pointer z-20"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 0.05, scale: 1.1, x: 40 }}
+            className="absolute w-72 h-[560px] bg-jungle rounded-[3.5rem] blur-2xl z-0"
+          />
+
+          {/* 2. The Primary Jungle Phone */}
+          <motion.div 
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            className="w-[280px] md:w-80 h-[560px] bg-jungle rounded-[3.5rem] border-[10px] border-jungle shadow-[0_50px_100px_rgba(0,0,0,0.4)] z-10 p-8 relative flex flex-col items-center"
           >
-            <div className="p-6 h-full flex flex-col">
-              <div className="w-12 h-2 bg-white/20 rounded-full mx-auto mb-8" />
-              <div className="space-y-4">
-                <div className="h-24 w-full bg-lime/10 rounded-2xl border border-lime/20 p-4">
-                    <div className="h-2 w-1/2 bg-lime/40 rounded mb-2" />
-                    <div className="h-4 w-3/4 bg-lime rounded" />
-                </div>
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="flex items-center gap-3 bg-white/5 p-3 rounded-xl">
-                    <div className="w-8 h-8 rounded bg-white/10" />
-                    <div className="flex-1 space-y-2">
-                        <div className="h-2 w-1/2 bg-white/20 rounded" />
-                        <div className="h-1 w-1/3 bg-white/10 rounded" />
-                    </div>
-                  </div>
-                ))}
-              </div>
+            {/* Phone Speaker */}
+            <div className="h-1.5 w-14 bg-white/10 rounded-full mb-10" />
+
+            {/* THE SCORE UI: Circular & Vibrant */}
+            <div className="w-full bg-white/5 rounded-[2.5rem] border border-white/10 p-6 text-center backdrop-blur-md mb-6">
+               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-4">Hustler Score</p>
+               <div className="w-32 h-32 rounded-full border-[10px] border-hustler-lime flex items-center justify-center mx-auto mb-4 breathe shadow-[0_0_30px_#a3e63550]">
+                  <span className="text-5xl font-[950] italic text-white">785</span>
+               </div>
+               
+               {/* Qualified Status Badge */}
+               <motion.div 
+                 initial={{ opacity: 0, scale: 0.5 }}
+                 whileInView={{ opacity: 1, scale: 1 }}
+                 className="inline-block bg-hustler-lime px-4 py-1.5 rounded-full text-[10px] font-black uppercase text-jungle shadow-lg shadow-hustler-lime/20"
+               >
+                 Loan Qualified
+               </motion.div>
+            </div>
+
+            {/* App Content Placeholders */}
+            <div className="w-full space-y-4">
+               <div className="h-16 bg-white/[0.03] rounded-2xl border border-white/5 flex items-center px-4">
+                  <div className="w-8 h-8 rounded bg-white/10 mr-4" />
+                  <div className="h-2 w-24 bg-white/20 rounded-full" />
+               </div>
+               <div className="h-16 bg-white/[0.03] rounded-2xl border border-white/5 flex items-center px-4">
+                  <div className="w-8 h-8 rounded bg-white/10 mr-4" />
+                  <div className="h-2 w-16 bg-white/20 rounded-full" />
+               </div>
             </div>
           </motion.div>
-
-          {/* Phone Mockup 2: Credit Score */}
-          <motion.div 
-            style={{ y: phone2Y }}
-            whileHover={{ scale: 1.05, rotateY: 10, rotateX: 5 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="absolute right-0 top-20 w-3/5 aspect-[9/19] bg-white rounded-[3rem] border-[8px] border-gray-100 shadow-2xl overflow-hidden cursor-pointer z-10"
-          >
-            <div className="p-6 h-full flex flex-col items-center justify-center text-center">
-                <div className="w-32 h-32 rounded-full border-[10px] border-lime flex items-center justify-center mb-4">
-                    <span className="text-forest text-4xl font-black">785</span>
-                </div>
-                <p className="text-forest font-black uppercase tracking-tighter text-xl">Excellent</p>
-                <div className="mt-6 w-full space-y-2">
-                    <div className="h-2 w-full bg-gray-100 rounded" />
-                    <div className="h-2 w-4/5 bg-gray-100 rounded" />
-                </div>
-            </div>
-          </motion.div>
-
         </div>
       </div>
     </section>
